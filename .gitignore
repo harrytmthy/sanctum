@@ -1,0 +1,30 @@
+# Build and IDE
+.gradle/
+.idea/
+*.iml
+build/
+out/
+captures/
+
+# Room
+**/schemas/
+
+# Kotlin & Java
+*.class
+*.dex
+*.apk
+*.ap_
+
+# Local configs
+local.properties
+
+# macOS
+.DS_Store
+
+# Generated sources
+gen/
+generated/
+
+# Compose compiler reports
+compose-metrics/
+compose-reports/
