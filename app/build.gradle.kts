@@ -37,6 +37,10 @@ android {
         versionName = "1.0.0"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".dev"
@@ -77,9 +81,12 @@ dependencies {
     implementation(libs.androidx.profileinstaller)
     implementation(libs.androidx.tracing.ktx)
     implementation(libs.androidx.window.core)
-    implementation(libs.kotlinx.coroutines.guava)
+    implementation(libs.androidx.work.ktx)
     implementation(libs.coil.kt)
+    implementation(libs.hilt.ext.work)
+    implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.timber)
 
     ksp(libs.hilt.compiler)
 

@@ -14,7 +14,7 @@
  * imitations under the License.
  */
 
-package com.harry.sanctum
+package com.harry.sanctum.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
