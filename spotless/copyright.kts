@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Harry Timothy Tumalewa
+ * Copyright $YEAR Harry Timothy Tumalewa
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.harry.sanctum.initializers
-
-import android.content.Context
-import androidx.startup.Initializer
-import com.harry.sanctum.BuildConfig.DEBUG
-import timber.log.Timber
-
-class TimberInitializer : Initializer<Unit> {
-
-    override fun create(context: Context) {
-        if (DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-    }
-
-    override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
-}
