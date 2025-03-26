@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.cryptography
+package com.harry.sanctum.core.cryptography
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties.BLOCK_MODE_GCM
@@ -22,6 +22,7 @@ import android.security.keystore.KeyProperties.ENCRYPTION_PADDING_NONE
 import android.security.keystore.KeyProperties.KEY_ALGORITHM_AES
 import android.security.keystore.KeyProperties.PURPOSE_DECRYPT
 import android.security.keystore.KeyProperties.PURPOSE_ENCRYPT
+import androidx.annotation.VisibleForTesting
 import timber.log.Timber
 import java.security.GeneralSecurityException
 import java.security.KeyStore
@@ -33,13 +34,13 @@ import javax.crypto.spec.SecretKeySpec
 
 object SecretKeyManager {
 
-    private const val KEY_ALIAS = "SlC2b9Al"
+    @VisibleForTesting internal const val KEY_ALIAS = "SlC2b9Al"
 
     private const val KEY_DERIVATION_ALGORITHM = "PBKDF2WithHmacSHA256"
 
     private const val KEY_DERIVATION_ITERATION_COUNT = 100_000
 
-    private const val KEY_PROVIDER = "AndroidKeyStore"
+    @VisibleForTesting internal const val KEY_PROVIDER = "AndroidKeyStore"
 
     private const val KEY_SIZE = 256
 
@@ -62,10 +63,14 @@ object SecretKeyManager {
             null
         }
 
-    fun hasSecretKey(): Boolean {
-        val keyStore = KeyStore.getInstance(KEY_PROVIDER).apply { load(null) }
-        return keyStore.containsAlias(KEY_ALIAS)
-    }
+    fun hasSecretKey(): Boolean? =
+        try {
+            val keyStore = KeyStore.getInstance(KEY_PROVIDER).apply { load(null) }
+            keyStore.containsAlias(KEY_ALIAS)
+        } catch (e: GeneralSecurityException) {
+            Timber.e(e)
+            null
+        }
 
     private fun createSecretKey(): SecretKey? =
         try {

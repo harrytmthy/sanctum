@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.cryptography
+package com.harry.sanctum.core.cryptography
 
 import android.content.Context
 import android.content.SharedPreferences
