@@ -19,19 +19,10 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.cryptography"
-    defaultConfig {
-        testInstrumentationRunner = "com.harry.sanctum.core.testing.HiltTestRunner"
-    }
+    namespace = "com.harry.sanctum.core.testing"
 }
 
 dependencies {
-    implementation(libs.androidx.security.crypto)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.timber)
-
-    androidTestImplementation(projects.core.testing)
-    androidTestImplementation(libs.androidx.test.ext)
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.hilt.android.testing)
+    implementation(libs.androidx.test.runner)
+    implementation(libs.hilt.android.testing)
 }

@@ -47,6 +47,7 @@ rootProject.name = "sanctum"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:cryptography")
+include(":core:testing")
 
 check(JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
     """
