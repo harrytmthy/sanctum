@@ -33,6 +33,7 @@ rootProject {
             kotlin {
                 target("**/*.kt")
                 targetExclude("**/build/**/*.kt")
+                targetExclude("**/Example*Test.kt")
                 ktlint(ktlintVersion).editorConfigOverride(mapOf("android" to "true"))
                 licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             }
@@ -43,7 +44,14 @@ rootProject {
             }
             format("xml") {
                 target("**/*.xml")
-                targetExclude("**/build/**/*.xml")
+                targetExclude(
+                    "**/build/**/*.xml",
+                    "**/ic_launcher*.xml",
+                    "**/themes.xml",
+                    "**/colors.xml",
+                    "**/backup_rules.xml",
+                    "**/data_extraction_rules.xml",
+                )
                 licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
             }
         }
