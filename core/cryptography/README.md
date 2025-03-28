@@ -1,64 +1,89 @@
 # :core:cryptography
 
-This module provides the cryptographic backbone for Sanctum's **privacy-first, offline-first**
-architecture. It handles:
+Sanctum's cryptographic core. This module powers **offline-first**, **zero-knowledge**, and
+**privacy-preserving** journal encryption with minimal runtime state.
 
-- AES secret key generation and storage using Android Keystore.
-- Password/PIN-based key derivation (PBKDF2).
-- Biometric-gated key usage support.
-- Stateless runtime encryption/decryption via injected keys.
+## Overview
 
-## Components
+This module handles:
 
-### SecretKeyManager
+- Session-based AES encryption
+- PIN-based key derivation (PBKDF2)
+- Secure salt and metadata storage
+- Guest and logged-in key isolation
+- Stateless runtime encryption/decryption
 
-- Generates or loads AES keys stored in Android Keystore (for guest mode).
-- Derives exportable AES keys from user-defined PIN (PBKDF2).
-- Supports biometric-gated Keystore key access.
-- Stateless interaction with Keystore and KDF systems.
-
-### CryptographyManager
-
-- Runtime encryption/decryption with externally provided `SecretKey`.
-- Session-level logic, does not persist keys.
-- Works seamlessly with both guest and authenticated flows.
-
-### EncryptedPrefs
-
-- Secures on-device persistence (e.g. salt, encrypted AES key).
-- Used in offline-first recovery scenarios.
-- Optional mirror with backend if sync is enabled.
-
-## Key Flows
+## Key Concepts
 
 ### Guest Mode
 
-- User can create journal entries without logging in.
-- Journal entries are encrypted via generated AES key and stored locally.
-- Uninstalling the app deletes the key, making the data irrecoverable.
+- A **randomized AES key** is generated locally.
+- This key encrypts/decrypts all journal data while offline.
+- The key is stored in **EncryptedSharedPreferences**.
+- Once uninstalled, the key is gone, and recovery is impossible.
 
-### Authenticated Mode
+### Logged-in Mode
 
-- After logging in, user is required to enter PIN.
-- On PIN setup, a derived key is created to wrap the encryption key to protect all data.
-- Encrypted AES key and salt are stored securely via EncryptedPrefs.
+- **On PIN setup:**
+  - A **salt** is generated.
+  - A **derived key** is created from the PIN + salt.
+  - This key encrypts the session AES key, resulting in an **Encrypted Session Key**.
+  - Both salt and Encrypted Session Key are stored locally and uplaoded to the backend.
+- **On login:** PIN + stored salt is used to re-derive key, then decrypt Encrypted Session Key,
+  and finally load **Session Key** into memory.
 
-### Biometric Integration (Optional)
+### In-Memory Session Key
 
-- Keystore key can be configured with biometric requirement.
-- **SecretKeyManager** supports such creation flows.
-- UI prompts handled externally, logic supported internally.
+- **Session Key** is loaded only after successful PIN entry.
+- It is used for runtime encryption/decryption.
+- Not persisted to disk.
+
+## Components
+
+### `KeyHandler`
+
+- Generates randomized AES keys for both guest and logged-in modes.
+- Derives keys from PIN + salt using PBKDF2.
+- Stateless utility (no side effects).
+
+### `Cryptography`
+
+- Performs encryption/decryption given a `SecretKey`.
+- Stateless, reusable across modules.
+
+### `CryptographyRepository`
+
+- Source of truth for all crypto logic:
+  - `generateAndSaveSalt()`
+  - `createAndSaveEncryptedSessionKey()`
+  - `loadSessionKey()`
+  - `encrypt()`, `decrypt()`, and `clearStorage()`
+- Bridges crypto operations with EncryptedPrefs.
+- Handles transition between guest and logged-in sessions.
+
+### `EncryptedPrefs`
+
+- Secure persistence layer (EncryptedSharedPreferences).
+- Before PIN setup, stores Guest Key. After PIN setup, stores both Salt and Encrypted Session Key
 
 ## Design Principles
 
 - **Zero-Knowledge by Default**  
-  Backend holds encrypted data it cannot decrypt.
+  Backend can never decrypt user data. Only user holds the PIN.
 
-- **Modular Cryptography**  
-  Clean separation between key generation, storage, and usage.
+- **Session-Based Architecture**  
+  No sensitive key lives in memory longer than needed.
 
-- **Offline-First, Sync-Aware**  
-  Encryption and journaling work offline.
+- **Offline-First, Sync-Optional**  
+  Works fully offline. Sync handled externally.
 
-- **Stateless by Design**  
-  Keys are never persisted in memory. They are derived or injected as needed.
+- **Single Entry Point**  
+  All key lifecycle logic flows through `CryptographyRepository`.
+
+## Test Coverage
+
+Thoroughly tested with:
+- Guest key generation
+- PIN-based session handling
+- Encryption/decryption (including edge cases)
+- Error propagation via `GeneralSecurityException`
