@@ -18,23 +18,24 @@ package com.harry.sanctum.core.cryptography
 
 import android.security.keystore.KeyProperties.KEY_ALGORITHM_AES
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.harry.sanctum.core.cryptography.extensions.toEncodedString
 import org.junit.runner.RunWith
+import java.security.GeneralSecurityException
 import javax.crypto.KeyGenerator
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import kotlin.test.assertFailsWith
 
 @RunWith(AndroidJUnit4::class)
-class CryptographyManagerTest {
+class CryptographyTest {
 
     @Test
     fun decrypt_withSecretKey_shouldTransformCiphertextToPlaintext() {
         val plaintext = "some plaintext"
-        val key = SecretKeyManager.getOrCreateSecretKey()
-        requireNotNull(key)
-        val ciphertext = CryptographyManager.encrypt(plaintext, key)
-        requireNotNull(ciphertext)
-        val result = CryptographyManager.decrypt(ciphertext, key)
+        val key = KeyHandler.generateAesKey()
+        val ciphertext = Cryptography.encrypt(plaintext, key)
+
+        val result = Cryptography.decrypt(ciphertext, key)
 
         assertEquals(plaintext, result)
     }
@@ -42,49 +43,46 @@ class CryptographyManagerTest {
     @Test
     fun decrypt_withDerivedKey_shouldTransformCiphertextToPlaintext() {
         val plaintext = "some plaintext"
-        val key = SecretKeyManager.deriveSecretKeyFromPin("123456".toCharArray(), byteArrayOf(1))
-        requireNotNull(key)
-        val ciphertext = CryptographyManager.encrypt(plaintext, key)
-        requireNotNull(ciphertext)
+        val pin = "123456".toCharArray()
+        val key = KeyHandler.deriveSecretKeyFromPin(pin, Cryptography.generateSalt())
+        val ciphertext = Cryptography.encrypt(plaintext, key)
 
-        val result = CryptographyManager.decrypt(ciphertext, key)
+        val result = Cryptography.decrypt(ciphertext, key)
 
         assertEquals(plaintext, result)
     }
 
     @Test
-    fun decrypt_withWrongKey_shouldReturnNull() {
+    fun decrypt_withWrongKey_shouldThrowException() {
         val plaintext = "some plaintext"
         val keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM_AES).apply { init(256) }
-        val ciphertext = CryptographyManager.encrypt(plaintext, keyGenerator.generateKey())
-        requireNotNull(ciphertext)
+        val firstKey = keyGenerator.generateKey().encoded.toEncodedString()
+        val secondKey = keyGenerator.generateKey().encoded.toEncodedString()
+        val ciphertext = Cryptography.encrypt(plaintext, firstKey)
 
-        val result = CryptographyManager.decrypt(ciphertext, keyGenerator.generateKey())
-
-        assertNull(result)
+        assertFailsWith<GeneralSecurityException> {
+            Cryptography.decrypt(ciphertext, secondKey)
+        }
     }
 
     @Test
-    fun decrypt_withMalformedCipherText_shouldReturnNull() {
+    fun decrypt_withMalformedCipherText_shouldThrowException() {
         val plaintext = "some plaintext"
-        val key = SecretKeyManager.getOrCreateSecretKey()
-        requireNotNull(key)
-        val ciphertext = CryptographyManager.encrypt(plaintext, key)
-        requireNotNull(ciphertext)
+        val key = KeyHandler.generateAesKey()
+        val ciphertext = Cryptography.encrypt(plaintext, key)
 
-        val result = CryptographyManager.decrypt(ciphertext.substring(1, ciphertext.length), key)
-
-        assertNull(result)
+        assertFailsWith<GeneralSecurityException> {
+            Cryptography.decrypt(ciphertext.substring(1, ciphertext.length), key)
+        }
     }
 
     @Test
     fun decrypt_withEmptyPlainText_shouldTransformCiphertextToPlaintext() {
         val plaintext = ""
-        val key = SecretKeyManager.getOrCreateSecretKey()
-        requireNotNull(key)
-        val ciphertext = CryptographyManager.encrypt(plaintext, key)
-        requireNotNull(ciphertext)
-        val result = CryptographyManager.decrypt(ciphertext, key)
+        val key = KeyHandler.generateAesKey()
+        val ciphertext = Cryptography.encrypt(plaintext, key)
+
+        val result = Cryptography.decrypt(ciphertext, key)
 
         assertEquals(plaintext, result)
     }
@@ -95,11 +93,10 @@ class CryptographyManagerTest {
             我的名字是 Harry 😇
             よろしくお願いします!
         """.trimIndent()
-        val key = SecretKeyManager.getOrCreateSecretKey()
-        requireNotNull(key)
-        val ciphertext = CryptographyManager.encrypt(plaintext, key)
-        requireNotNull(ciphertext)
-        val result = CryptographyManager.decrypt(ciphertext, key)
+        val key = KeyHandler.generateAesKey()
+        val ciphertext = Cryptography.encrypt(plaintext, key)
+
+        val result = Cryptography.decrypt(ciphertext, key)
 
         assertEquals(plaintext, result)
     }

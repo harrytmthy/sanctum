@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.cryptography
+package com.harry.sanctum.core.cryptography.di
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -22,6 +22,8 @@ import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionSche
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 import androidx.security.crypto.EncryptedSharedPreferences.create
 import androidx.security.crypto.MasterKey
+import com.harry.sanctum.core.cryptography.data.CryptographyRepositoryImpl
+import com.harry.sanctum.core.cryptography.domain.CryptographyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +33,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CryptographyModule {
+internal object CryptographyModule {
 
     private const val PREF_FILE_NAME = "SDE7Bx0C"
 
@@ -44,4 +46,9 @@ object CryptographyModule {
             .build()
         return create(context, PREF_FILE_NAME, masterKey, AES256_SIV, AES256_GCM)
     }
+
+    @Singleton
+    @Provides
+    fun provideRepository(repository: CryptographyRepositoryImpl): CryptographyRepository =
+        repository
 }

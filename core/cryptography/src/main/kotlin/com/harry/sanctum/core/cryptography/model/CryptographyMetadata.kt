@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.cryptography
+package com.harry.sanctum.core.cryptography.model
 
-import javax.inject.Qualifier
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class EncryptedPrefs
+data class CryptographyMetadata(
+    val salt: String,
+    val encryptedSessionKey: String,
+)
