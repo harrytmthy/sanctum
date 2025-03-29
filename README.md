@@ -48,22 +48,25 @@ implementations or handcrafted fakes with test-only hooks. This approach helps:
 - Avoid brittle mocks.
 - Encourage contract-based architecture.
 
-## Requirements
+## System Requirements
 
 - Android Studio Hedgehog or newer
 - JVM 17
-- Minimum SDK: 24
 
-## Getting Started
+## Setup
 
-### Clone the repository
-
-```
-https://github.com/harrytmthy-dev/sanctum.git
-```
-
-### Run tests
+### Update pre-hook path
+`/scripts` contains shared pre-hooks for certain checks & validations. To change your local hooks
+path, need to run following command:
 
 ```
-./gradlew testDebugUnitTest
+git config --local core.hooksPath scripts
+chmod +x scripts/pre-push.sh
+```
+
+### Run spotless
+To apply spotless run this command:
+
+```
+./gradlew --init-script gradle/init.gradle.kts --no-configuration-cache
 ```
