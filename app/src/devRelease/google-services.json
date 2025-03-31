@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "29022625754",
+    "project_id": "sanctum-journal-dev",
+    "storage_bucket": "sanctum-journal-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29022625754:android:14489153f23291881beae3",
+        "android_client_info": {
+          "package_name": "com.harry.sanctum.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhtzpQvMPrVRkYhD__UPlYQ_WD_wX1KL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,6 +23,7 @@ plugins {
     alias(libs.plugins.convention.hilt)
     alias(libs.plugins.convention.kotlin)
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.gms)
     alias(libs.plugins.roborazzi)
     alias(libs.plugins.kotlin.serialization)
 }
@@ -60,12 +61,16 @@ android {
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
         }
+        create("prod") {
+            dimension = "env"
+        }
     }
 
     testOptions.animationsDisabled = true
 }
 
 dependencies {
+    implementation(platform(libs.firebase.bom))
     implementation(projects.core.cryptography)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -84,6 +89,7 @@ dependencies {
     implementation(libs.androidx.window.core)
     implementation(libs.androidx.work.ktx)
     implementation(libs.coil.kt)
+    implementation(libs.firebase.analytics)
     implementation(libs.hilt.ext.work)
     implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.serialization.json)
