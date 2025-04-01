@@ -65,6 +65,10 @@ gradlePlugin {
             id = libs.plugins.convention.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"
         }
+        register("jvm") {
+            id = libs.plugins.convention.jvm.get().pluginId
+            implementationClass = "JvmConventionPlugin"
+        }
         register("kotlin") {
             id = libs.plugins.convention.kotlin.get().pluginId
             implementationClass = "KotlinConventionPlugin"

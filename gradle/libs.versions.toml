@@ -181,5 +181,6 @@ convention-compose = { id = "convention.compose" }
 convention-feature = { id = "convention.feature" }
 convention-hilt = { id = "convention.hilt" }
 convention-kotlin = { id = "convention.kotlin" }
+convention-jvm = { id = "convention.jvm" }
 convention-library = { id = "convention.library" }
 convention-room = { id = "convention.room" }
