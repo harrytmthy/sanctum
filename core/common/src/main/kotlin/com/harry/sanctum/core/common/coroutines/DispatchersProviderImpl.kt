@@ -16,8 +16,11 @@
 
 package com.harry.sanctum.core.common.coroutines
 
-import javax.inject.Qualifier
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class ApplicationScope
+internal object DispatchersProviderImpl : DispatchersProvider {
+    override val default: CoroutineDispatcher = Dispatchers.Default
+    override val io: CoroutineDispatcher = Dispatchers.IO
+    override val main: CoroutineDispatcher = Dispatchers.Main
+}

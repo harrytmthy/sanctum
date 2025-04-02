@@ -16,14 +16,10 @@
 
 package com.harry.sanctum.core.common.coroutines
 
-import javax.inject.Qualifier
+import kotlinx.coroutines.CoroutineDispatcher
 
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class Dispatcher(val dispatcher: SanctumDispatchers)
-
-enum class SanctumDispatchers {
-    Default,
-    IO,
-    Main,
+interface DispatchersProvider {
+    val default: CoroutineDispatcher
+    val io: CoroutineDispatcher
+    val main: CoroutineDispatcher
 }

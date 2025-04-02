@@ -16,26 +16,26 @@
 
 package com.harry.sanctum.core.common.di
 
-import com.harry.sanctum.core.common.coroutines.ApplicationScope
-import com.harry.sanctum.core.common.coroutines.Dispatcher
-import com.harry.sanctum.core.common.coroutines.SanctumDispatchers
+import com.harry.sanctum.core.common.coroutines.DispatchersProvider
+import com.harry.sanctum.core.common.coroutines.DispatchersProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object CoroutineScopesModule {
+internal object CoroutinesModule {
 
-    @Provides
     @Singleton
-    @ApplicationScope
-    fun provideApplicationScope(
-        @Dispatcher(SanctumDispatchers.Default) dispatcher: CoroutineDispatcher,
-    ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
+    @Provides
+    fun provideDispatchersProvider(): DispatchersProvider = DispatchersProviderImpl
+
+    @Singleton
+    @Provides
+    fun provideApplicationScope(dispatchersProvider: DispatchersProvider): CoroutineScope =
+        CoroutineScope(SupervisorJob() + dispatchersProvider.io)
 }

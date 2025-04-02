@@ -1,11 +1,13 @@
 #!/bin/bash
 
+cd "$(git rev-parse --show-toplevel)" || exit
+
 # Run spotlessCheck
 echo "Running spotless..."
-./gradlew --init-script gradle/init.gradle.kts spotlessApply --no-configuration-cache
+./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
 if [ $? -ne 0 ]; then
   echo "Spotless check failed. Please run below command:"
-  echo "./gradlew --init-script gradle/init.gradle.kts spotlessApply --no-configuration-cache"
+  echo "./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache"
   exit 1
 fi
 
