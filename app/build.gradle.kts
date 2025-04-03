@@ -72,6 +72,7 @@ android {
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(projects.core.cryptography)
+    implementation(projects.core.network)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive)

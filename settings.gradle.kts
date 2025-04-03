@@ -48,6 +48,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:common")
 include(":core:cryptography")
+include(":core:network")
 include(":core:testing")
 
 check(JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {

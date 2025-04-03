@@ -88,6 +88,7 @@ class KotlinConventionPlugin : Plugin<Project> {
                 jvmTarget = JvmTarget.JVM_11
                 allWarningsAsErrors = warningsAsErrors.toBoolean()
                 freeCompilerArgs.add("-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
+                freeCompilerArgs.add("-opt-in=kotlinx.coroutines.FlowPreview")
                 freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
             }
         }

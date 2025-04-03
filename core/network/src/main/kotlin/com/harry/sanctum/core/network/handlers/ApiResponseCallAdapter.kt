@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum
+package com.harry.sanctum.core.network.handlers
 
-import android.app.Application
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import dagger.Lazy
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import com.harry.sanctum.core.common.ApiResponse
+import retrofit2.Call
+import retrofit2.CallAdapter
+import java.lang.reflect.Type
 
-@HiltAndroidApp
-class SanctumApplication : Application(), ImageLoaderFactory {
+internal class ApiResponseCallAdapter<T : Any>(
+    private val successType: Type,
+) : CallAdapter<T, Call<ApiResponse<T>>> {
 
-    @Inject
-    lateinit var imageLoader: Lazy<ImageLoader>
+    override fun responseType(): Type = successType
 
-    override fun newImageLoader(): ImageLoader = imageLoader.get()
+    override fun adapt(call: Call<T>): Call<ApiResponse<T>> = ApiResponseCall(call)
 }

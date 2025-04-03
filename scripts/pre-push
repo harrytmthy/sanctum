@@ -27,4 +27,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Run instrumented tests
+echo "Running instrumented tests..."
+./gradlew connectedAndroidTest --quiet
+if [ $? -ne 0 ]; then
+  echo "Instrumented tests failed. Fix them before pushing."
+  exit 1
+fi
+
 exit 0

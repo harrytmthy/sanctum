@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum
+package com.harry.sanctum.core.network
 
-import android.app.Application
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import dagger.Lazy
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import com.harry.sanctum.core.network.utils.NetworkMonitor
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
-@HiltAndroidApp
-class SanctumApplication : Application(), ImageLoaderFactory {
+object FakeNetworkMonitor : NetworkMonitor {
 
-    @Inject
-    lateinit var imageLoader: Lazy<ImageLoader>
+    private val _isOnline = MutableStateFlow(true)
+    override val isOnline = _isOnline.asStateFlow()
 
-    override fun newImageLoader(): ImageLoader = imageLoader.get()
+    fun setIsOnline(value: Boolean) {
+        _isOnline.update { value }
+    }
 }
