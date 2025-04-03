@@ -61,12 +61,13 @@ path, need to run following command:
 
 ```
 git config --local core.hooksPath scripts
-chmod +x scripts/pre-push.sh
+chmod +x scripts/pre-commit
+chmod +x scripts/pre-push
 ```
 
 ### Run spotless
 To apply spotless run this command:
 
 ```
-./gradlew --init-script gradle/init.gradle.kts --no-configuration-cache
+./gradlew spotlessApply --init-script gradle/init.gradle.kts --no-configuration-cache
 ```

@@ -34,6 +34,7 @@ internal object CoroutinesModule {
     @Provides
     fun provideDispatchersProvider(): DispatchersProvider = DispatchersProviderImpl
 
+    @ApplicationScope
     @Singleton
     @Provides
     fun provideApplicationScope(dispatchersProvider: DispatchersProvider): CoroutineScope =

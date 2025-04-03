@@ -13,18 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    alias(libs.plugins.convention.library)
-    alias(libs.plugins.convention.hilt)
-}
 
-android {
-    namespace = "com.harry.sanctum.core.testing"
-}
+package com.harry.sanctum.core.common.di
 
-dependencies {
-    implementation(projects.core.common)
-    implementation(libs.androidx.test.runner)
-    implementation(libs.hilt.android.testing)
-    implementation(libs.kotlinx.coroutines.test)
-}
+import javax.inject.Qualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ApplicationScope

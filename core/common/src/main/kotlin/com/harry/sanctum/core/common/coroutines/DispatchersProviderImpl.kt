@@ -22,5 +22,4 @@ import kotlinx.coroutines.Dispatchers
 internal object DispatchersProviderImpl : DispatchersProvider {
     override val default: CoroutineDispatcher = Dispatchers.Default
     override val io: CoroutineDispatcher = Dispatchers.IO
-    override val main: CoroutineDispatcher = Dispatchers.Main
 }
