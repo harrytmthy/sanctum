@@ -23,7 +23,7 @@ The base URL is defined in `secrets.properties`, facilitating easy switching bet
 and production:
 
 ```
-BACKEND_URL="https://sanctum-journal-dev-default-rtdb.asia-southeast1.firebasedatabase.app/"
+BACKEND_URL="https://firestore.googleapis.com/v1/projects/sanctum-dev/databases/(default)/documents"
 ```
 
 The URL for production is swapped automatically by CI scripts during release builds.
