@@ -49,7 +49,6 @@ rootProject {
                     "**/ic_launcher*.xml",
                     "**/themes.xml",
                     "**/colors.xml",
-                    "**/backup_rules.xml",
                     "**/data_extraction_rules.xml",
                 )
                 licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")

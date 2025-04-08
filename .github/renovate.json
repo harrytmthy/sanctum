@@ -4,6 +4,7 @@
   "baseBranches": ["main"],
   "schedule": ["after 3pm on wednesday"],
   "timezone": "Asia/Jakarta",
+  "dependencyDashboard": false,
   "gitIgnoredAuthors": [
     "renovate[bot]@users.noreply.github.com",
     "github-actions[bot]@users.noreply.github.com",
