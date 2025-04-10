@@ -50,6 +50,7 @@ include(":core:common")
 include(":core:cryptography")
 include(":core:database")
 include(":core:network")
+include(":core:sync")
 include(":core:testing")
 
 check(JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
