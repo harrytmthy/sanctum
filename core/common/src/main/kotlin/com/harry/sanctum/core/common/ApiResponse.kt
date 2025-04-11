@@ -32,7 +32,7 @@ sealed class ApiResponse<out T : Any> {
 
     data class Success<T : Any>(val data: T?) : ApiResponse<T>()
 
-    data class ApiError(val message: String, val code: Int) : ApiResponse<Nothing>()
+    data class ApiError(val error: ErrorDetail) : ApiResponse<Nothing>()
 
     data class NetworkError(val error: IOException) : ApiResponse<Nothing>()
 
@@ -43,7 +43,7 @@ sealed class ApiResponse<out T : Any> {
     fun unwrap() = when (this) {
         is Success -> data
         is NoInternetError -> throw NoInternetException
-        is ApiError -> throw ApiErrorException(message = message, code = code)
+        is ApiError -> throw ApiErrorException(message = error.message, code = error.code)
         is NetworkError -> throw error
         is UnknownError -> throw throwable
     }

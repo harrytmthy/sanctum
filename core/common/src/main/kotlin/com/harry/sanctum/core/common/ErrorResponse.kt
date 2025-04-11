@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    alias(libs.plugins.convention.jvm)
-    alias(libs.plugins.convention.hilt)
-    id("kotlinx-serialization")
-}
 
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.serialization.json)
-}
+package com.harry.sanctum.core.common
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ErrorResponse(val error: ErrorDetail)
+
+@Serializable
+data class ErrorDetail(
+    val code: Int,
+    val message: String,
+    val status: String,
+)

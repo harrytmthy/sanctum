@@ -22,9 +22,9 @@ import com.harry.sanctum.core.common.ApiResponse.NetworkError
 import com.harry.sanctum.core.common.ApiResponse.NoInternetError
 import com.harry.sanctum.core.common.ApiResponse.Success
 import com.harry.sanctum.core.common.ApiResponse.UnknownError
+import com.harry.sanctum.core.common.ErrorResponse
 import com.harry.sanctum.core.common.exceptions.NoInternetException
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
@@ -55,8 +55,8 @@ internal class ApiResponseCall<T : Any>(private val delegate: Call<T>) : Call<Ap
     private fun getApiResponse(response: Response<T>): ApiResponse<T> = when {
         response.isSuccessful -> Success(response.body())
         else -> response.errorBody()?.let {
-            val jsonObj = Json.decodeFromString<JsonObject>(it.string())
-            ApiError(jsonObj["error"].toString(), response.code())
+            val errorResponse = Json.decodeFromString<ErrorResponse>(it.string())
+            ApiError(errorResponse.error)
         } ?: UnknownError(IllegalStateException("API error with null body"))
     }
 
