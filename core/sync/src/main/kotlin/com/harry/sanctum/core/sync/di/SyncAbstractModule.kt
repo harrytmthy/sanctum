@@ -16,20 +16,17 @@
 
 package com.harry.sanctum.core.sync.di
 
-import com.harry.sanctum.core.sync.data.EntryApi
+import com.harry.sanctum.core.sync.SyncManager
+import com.harry.sanctum.core.sync.WorkManagerSyncManager
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SyncModule {
+internal interface SyncAbstractModule {
 
-    @Singleton
-    @Provides
-    fun provideEntityService(retrofit: Retrofit): EntryApi = retrofit.create()
+    @Binds
+    fun bindsSyncManager(syncManager: WorkManagerSyncManager): SyncManager
 }

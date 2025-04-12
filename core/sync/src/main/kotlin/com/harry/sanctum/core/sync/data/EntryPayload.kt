@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.di
+package com.harry.sanctum.core.sync.data
 
-import com.harry.sanctum.core.sync.data.EntryApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
+import kotlinx.serialization.Serializable
 
-@Module
-@InstallIn(SingletonComponent::class)
-object SyncModule {
-
-    @Singleton
-    @Provides
-    fun provideEntityService(retrofit: Retrofit): EntryApi = retrofit.create()
-}
+@Serializable
+data class EntryPayload(
+    val entryId: String,
+    val title: String,
+    val content: String,
+    val createdAt: Long,
+    val updatedAt: Long,
+    val deletedAt: Long?,
+)
