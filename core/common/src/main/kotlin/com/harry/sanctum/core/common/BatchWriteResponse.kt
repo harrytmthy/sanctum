@@ -19,12 +19,7 @@ package com.harry.sanctum.core.common
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DocumentWrapper<T>(val document: Document<T>?)
+data class BatchWriteResponse(val status: List<Status>)
 
 @Serializable
-data class Document<T>(
-    val name: String,
-    val fields: T,
-    val createTime: String,
-    val updateTime: String,
-)
+data class Status(val code: Int, val message: String)

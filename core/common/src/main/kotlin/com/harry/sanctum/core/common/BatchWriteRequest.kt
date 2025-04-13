@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.di
+package com.harry.sanctum.core.common
 
-import com.harry.sanctum.core.sync.data.JournalEntriesApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
+import kotlinx.serialization.Serializable
 
-@Module
-@InstallIn(SingletonComponent::class)
-object SyncModule {
+@Serializable
+data class BatchWriteRequest<T>(val writes: List<Write<T>>)
 
-    @Singleton
-    @Provides
-    fun provideEntriesApi(retrofit: Retrofit): JournalEntriesApi = retrofit.create()
-}
+@Serializable
+data class Write<T>(val update: Document<T>)
+
+@Serializable
+data class DocumentWrapper<T>(val document: Document<T>?)
+
+@Serializable
+data class Document<T>(val name: String, val fields: T)

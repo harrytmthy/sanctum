@@ -17,23 +17,22 @@
 package com.harry.sanctum.core.sync.data
 
 import com.harry.sanctum.core.common.ApiResponse
-import com.harry.sanctum.core.common.Document
+import com.harry.sanctum.core.common.BatchWriteRequest
+import com.harry.sanctum.core.common.BatchWriteResponse
 import com.harry.sanctum.core.common.DocumentWrapper
 import com.harry.sanctum.core.common.StructuredQueryRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
-import retrofit2.http.Path
 
-interface EntryApi {
+interface JournalEntriesApi {
 
-    @POST(":runQuery")
+    @POST("documents:runQuery")
     suspend fun getJournalEntries(
         @Body request: StructuredQueryRequest,
     ): ApiResponse<List<DocumentWrapper<EntryPayload>>>
 
-    @POST("journals/{userId}/entries")
-    suspend fun upsertEntry(
-        @Path("userId") userId: String,
-        @Body document: Document<EntryPayload>,
-    ): ApiResponse<Document<EntryPayload>>
+    @POST("documents:batchWrite")
+    suspend fun upsertJournalEntries(
+        @Body request: BatchWriteRequest<EntryPayload>,
+    ): ApiResponse<BatchWriteResponse>
 }
