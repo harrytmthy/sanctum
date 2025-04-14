@@ -26,7 +26,10 @@ import kotlinx.coroutines.flow.Flow
 interface EntrySyncDao {
 
     @Query("SELECT * FROM entries_sync")
-    fun getAllSynced(): Flow<List<EntrySyncEntity>>
+    fun getPendingEntries(): List<EntrySyncEntity>
+
+    @Query("SELECT * FROM entries_sync")
+    fun observePendingEntries(): Flow<List<EntrySyncEntity>>
 
     @Upsert
     suspend fun upsertSynced(entrySync: EntrySyncEntity)

@@ -68,7 +68,7 @@ class EntrySyncDaoTest {
 
         entrySyncDao.upsertSynced(entry)
 
-        val result = entrySyncDao.getAllSynced().first()
+        val result = entrySyncDao.observePendingEntries().first()
         assertEquals(1, result.size)
         assertEquals(entry.copy(id = 1L), result.first())
     }
@@ -85,7 +85,7 @@ class EntrySyncDaoTest {
 
         entrySyncDao.deleteSyncedByEntryIds(listOf("id1", "id2"))
 
-        val result = entrySyncDao.getAllSynced().first()
+        val result = entrySyncDao.observePendingEntries().first()
         assertEquals(entries.last().copy(id = 3L), result.first())
     }
 }

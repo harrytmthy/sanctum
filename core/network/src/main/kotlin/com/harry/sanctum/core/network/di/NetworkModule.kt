@@ -23,6 +23,7 @@ import coil.util.DebugLogger
 import com.harry.sanctum.core.network.BuildConfig
 import com.harry.sanctum.core.network.BuildConfig.DEBUG
 import com.harry.sanctum.core.network.di.qualifiers.ApplicationInterceptor
+import com.harry.sanctum.core.network.di.qualifiers.BaseUrl
 import com.harry.sanctum.core.network.di.qualifiers.NetworkInterceptor
 import com.harry.sanctum.core.network.handlers.ApiResponseCallAdapterFactory
 import dagger.Lazy
@@ -116,4 +117,9 @@ internal object NetworkModule {
                 }
             }
             .build()
+
+    @BaseUrl
+    @Singleton
+    @Provides
+    fun provideBaseUrl(): String = BuildConfig.BACKEND_URL
 }

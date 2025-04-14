@@ -22,6 +22,7 @@ import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionSche
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 import androidx.security.crypto.EncryptedSharedPreferences.create
 import androidx.security.crypto.MasterKey
+import com.harry.sanctum.core.common.di.EncryptedPrefs
 import com.harry.sanctum.core.cryptography.data.CryptographyRepositoryImpl
 import com.harry.sanctum.core.cryptography.domain.CryptographyRepository
 import dagger.Module

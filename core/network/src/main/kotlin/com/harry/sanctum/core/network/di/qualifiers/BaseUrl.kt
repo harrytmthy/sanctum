@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.cryptography.di
+package com.harry.sanctum.core.network.di.qualifiers
 
 import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class EncryptedPrefs
+annotation class BaseUrl

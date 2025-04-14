@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.di
+package com.harry.sanctum.core.common.di
 
-import com.harry.sanctum.core.sync.data.api.JournalEntriesApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
+import javax.inject.Qualifier
 
-@Module
-@InstallIn(SingletonComponent::class)
-object SyncModule {
-
-    @Singleton
-    @Provides
-    fun provideEntriesApi(retrofit: Retrofit): JournalEntriesApi = retrofit.create()
-}
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class EncryptedPrefs

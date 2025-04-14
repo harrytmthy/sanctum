@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.di
+package com.harry.sanctum.core.common.factories
 
-import com.harry.sanctum.core.sync.data.api.JournalEntriesApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
+import com.harry.sanctum.core.common.BatchWriteRequest
 
-@Module
-@InstallIn(SingletonComponent::class)
-object SyncModule {
-
-    @Singleton
-    @Provides
-    fun provideEntriesApi(retrofit: Retrofit): JournalEntriesApi = retrofit.create()
+interface BatchWriteRequestFactory<T, R> {
+    fun create(entities: List<T>): BatchWriteRequest<R>
 }

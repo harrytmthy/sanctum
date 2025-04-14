@@ -26,6 +26,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common)
     implementation(libs.androidx.security.crypto)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.timber)

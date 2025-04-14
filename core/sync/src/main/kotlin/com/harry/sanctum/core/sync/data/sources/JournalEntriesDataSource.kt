@@ -14,25 +14,17 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.data
+package com.harry.sanctum.core.sync.data.sources
 
-import com.harry.sanctum.core.common.ApiResponse
 import com.harry.sanctum.core.common.BatchWriteRequest
 import com.harry.sanctum.core.common.BatchWriteResponse
 import com.harry.sanctum.core.common.DocumentWrapper
 import com.harry.sanctum.core.common.StructuredQueryRequest
-import retrofit2.http.Body
-import retrofit2.http.POST
+import com.harry.sanctum.core.sync.data.EntryPayload
 
-interface JournalEntriesApi {
+interface JournalEntriesDataSource {
 
-    @POST("documents:runQuery")
-    suspend fun getJournalEntries(
-        @Body request: StructuredQueryRequest,
-    ): ApiResponse<List<DocumentWrapper<EntryPayload>>>
+    suspend fun getEntries(request: StructuredQueryRequest): List<DocumentWrapper<EntryPayload>>?
 
-    @POST("documents:batchWrite")
-    suspend fun upsertJournalEntries(
-        @Body request: BatchWriteRequest<EntryPayload>,
-    ): ApiResponse<BatchWriteResponse>
+    suspend fun upsertEntries(request: BatchWriteRequest<EntryPayload>): BatchWriteResponse?
 }

@@ -14,22 +14,9 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync.di
+package com.harry.sanctum.core.common.constants
 
-import com.harry.sanctum.core.sync.data.api.JournalEntriesApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.create
-import javax.inject.Singleton
-
-@Module
-@InstallIn(SingletonComponent::class)
-object SyncModule {
-
-    @Singleton
-    @Provides
-    fun provideEntriesApi(retrofit: Retrofit): JournalEntriesApi = retrofit.create()
+object SessionConstants {
+    const val PREF_USER_ID = "jLs17cOzQb"
+    const val ERROR_NULL_USER_ID = "userId is null."
 }
