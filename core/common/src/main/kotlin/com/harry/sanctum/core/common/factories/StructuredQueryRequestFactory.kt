@@ -19,5 +19,5 @@ package com.harry.sanctum.core.common.factories
 import com.harry.sanctum.core.common.StructuredQueryRequest
 
 interface StructuredQueryRequestFactory {
-    fun create(page: Int): StructuredQueryRequest?
+    fun create(page: Int): StructuredQueryRequest
 }

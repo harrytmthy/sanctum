@@ -22,10 +22,14 @@ plugins {
 
 android {
     namespace = "com.harry.sanctum.core.sync"
+    defaultConfig {
+        testInstrumentationRunner = "com.harry.sanctum.core.testing.HiltTestRunner"
+    }
 }
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.core.cryptography)
     implementation(projects.core.database)
     implementation(projects.core.network)
     implementation(libs.androidx.work.ktx)
@@ -35,4 +39,9 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.core)
     implementation(libs.timber)
+
+    androidTestImplementation(projects.core.testing)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.hilt.android.testing)
 }

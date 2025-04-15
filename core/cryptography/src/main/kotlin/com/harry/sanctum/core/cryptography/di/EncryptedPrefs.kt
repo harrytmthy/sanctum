@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.common.di
+package com.harry.sanctum.core.cryptography.di
 
 import javax.inject.Qualifier
 

@@ -16,8 +16,14 @@
 
 package com.harry.sanctum.core.sync.di
 
+import com.harry.sanctum.core.common.factories.BatchWriteRequestFactory
+import com.harry.sanctum.core.common.factories.StructuredQueryRequestFactory
+import com.harry.sanctum.core.database.model.EntryEntity
 import com.harry.sanctum.core.sync.SyncManager
 import com.harry.sanctum.core.sync.WorkManagerSyncManager
+import com.harry.sanctum.core.sync.data.EntryPayload
+import com.harry.sanctum.core.sync.data.factories.JournalEntriesBatchWriteRequestFactory
+import com.harry.sanctum.core.sync.data.factories.JournalEntriesStructuredQueryRequestFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,5 +34,15 @@ import dagger.hilt.components.SingletonComponent
 internal interface SyncAbstractModule {
 
     @Binds
-    fun bindsSyncManager(syncManager: WorkManagerSyncManager): SyncManager
+    fun bindSyncManager(syncManager: WorkManagerSyncManager): SyncManager
+
+    @Binds
+    fun bindJournalEntriesBatchWriteRequestFactory(
+        factory: JournalEntriesBatchWriteRequestFactory,
+    ): BatchWriteRequestFactory<EntryEntity, EntryPayload>
+
+    @Binds
+    fun bindJournalEntriesStructuredQueryRequestFactory(
+        factory: JournalEntriesStructuredQueryRequestFactory,
+    ): StructuredQueryRequestFactory
 }

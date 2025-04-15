@@ -25,8 +25,8 @@ import com.harry.sanctum.core.common.StructuredQuery
 import com.harry.sanctum.core.common.StructuredQueryRequest
 import com.harry.sanctum.core.common.constants.SessionConstants.ERROR_NULL_USER_ID
 import com.harry.sanctum.core.common.constants.SessionConstants.PREF_USER_ID
-import com.harry.sanctum.core.common.di.EncryptedPrefs
 import com.harry.sanctum.core.common.factories.StructuredQueryRequestFactory
+import com.harry.sanctum.core.cryptography.di.EncryptedPrefs
 import javax.inject.Inject
 import javax.inject.Singleton
 

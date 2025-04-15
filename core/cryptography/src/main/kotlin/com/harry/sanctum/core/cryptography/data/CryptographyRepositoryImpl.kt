@@ -18,9 +18,9 @@ package com.harry.sanctum.core.cryptography.data
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.harry.sanctum.core.common.di.EncryptedPrefs
 import com.harry.sanctum.core.cryptography.Cryptography
 import com.harry.sanctum.core.cryptography.KeyHandler
+import com.harry.sanctum.core.cryptography.di.EncryptedPrefs
 import com.harry.sanctum.core.cryptography.domain.CryptographyRepository
 import com.harry.sanctum.core.cryptography.model.CryptographyMetadata
 import javax.inject.Inject

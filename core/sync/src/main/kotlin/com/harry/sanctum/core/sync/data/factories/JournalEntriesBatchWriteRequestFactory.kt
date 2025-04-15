@@ -22,15 +22,16 @@ import com.harry.sanctum.core.common.Document
 import com.harry.sanctum.core.common.Write
 import com.harry.sanctum.core.common.constants.SessionConstants.ERROR_NULL_USER_ID
 import com.harry.sanctum.core.common.constants.SessionConstants.PREF_USER_ID
-import com.harry.sanctum.core.common.di.EncryptedPrefs
 import com.harry.sanctum.core.common.factories.BatchWriteRequestFactory
+import com.harry.sanctum.core.cryptography.di.EncryptedPrefs
 import com.harry.sanctum.core.database.model.EntryEntity
 import com.harry.sanctum.core.network.di.qualifiers.BaseUrl
 import com.harry.sanctum.core.sync.data.EntryPayload
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class JournalEntriesBatchWriteRequestFactory(
+internal class JournalEntriesBatchWriteRequestFactory @Inject constructor(
     @BaseUrl private val baseUrl: String,
     @EncryptedPrefs private val prefs: SharedPreferences,
 ) : BatchWriteRequestFactory<EntryEntity, EntryPayload> {
