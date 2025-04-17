@@ -26,14 +26,11 @@ import kotlinx.coroutines.flow.Flow
 interface EntrySyncDao {
 
     @Query("SELECT * FROM entries_sync")
-    fun getPendingEntries(): List<EntrySyncEntity>
-
-    @Query("SELECT * FROM entries_sync")
     fun observePendingEntries(): Flow<List<EntrySyncEntity>>
 
     @Upsert
-    suspend fun upsertSynced(entrySync: EntrySyncEntity)
+    suspend fun upsertPendingEntry(entrySync: EntrySyncEntity)
 
     @Query("DELETE FROM entries_sync WHERE entryId IN (:entryIds)")
-    suspend fun deleteSyncedByEntryIds(entryIds: List<String>)
+    suspend fun deletePendingEntryByIds(entryIds: List<String>)
 }

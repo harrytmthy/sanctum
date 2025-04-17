@@ -25,7 +25,7 @@ import kotlinx.datetime.Instant
     tableName = "entries",
     indices = [
         Index("deletedAt", "createdAt"),
-        Index("entryId"),
+        Index("entryId", unique = true),
     ],
 )
 data class EntryEntity(

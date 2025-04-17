@@ -34,6 +34,9 @@ interface EntryDao {
     )
     suspend fun getEntries(limit: Int, offset: Int): List<EntryEntity>
 
+    @Query("SELECT * FROM entries WHERE entryId IN (SELECT entryId FROM entries_sync)")
+    suspend fun getPendingEntries(): List<EntryEntity>
+
     @Query("SELECT * FROM entries WHERE entryId IN (:entryIds)")
     suspend fun getEntriesByIds(entryIds: List<String>): List<EntryEntity>
 

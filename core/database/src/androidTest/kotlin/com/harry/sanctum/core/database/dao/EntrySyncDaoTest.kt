@@ -58,7 +58,7 @@ class EntrySyncDaoTest {
     }
 
     @Test
-    fun upsertSynced_shouldInsertAndRetrieveCorrectly() = runTest {
+    fun upsertPendingEntry_shouldInsertAndRetrieveCorrectly() = runTest {
         val now = Clock.System.now()
         val entry = EntrySyncEntity(
             id = 0L,
@@ -66,7 +66,7 @@ class EntrySyncDaoTest {
             createdAt = now,
         )
 
-        entrySyncDao.upsertSynced(entry)
+        entrySyncDao.upsertPendingEntry(entry)
 
         val result = entrySyncDao.observePendingEntries().first()
         assertEquals(1, result.size)
@@ -74,16 +74,16 @@ class EntrySyncDaoTest {
     }
 
     @Test
-    fun deleteSyncedByEntryIds_shouldDeleteCorrectEntry() = runTest {
+    fun deleteSyncedByEntryIds_shouldDeleteCorrectEntryBy() = runTest {
         val now = Clock.System.now()
         val entries = listOf(
             EntrySyncEntity(0L, "id1", now),
             EntrySyncEntity(0L, "id2", now),
             EntrySyncEntity(0L, "id3", now),
         )
-        entries.forEach { entrySyncDao.upsertSynced(it) }
+        entries.forEach { entrySyncDao.upsertPendingEntry(it) }
 
-        entrySyncDao.deleteSyncedByEntryIds(listOf("id1", "id2"))
+        entrySyncDao.deletePendingEntryByIds(listOf("id1", "id2"))
 
         val result = entrySyncDao.observePendingEntries().first()
         assertEquals(entries.last().copy(id = 3L), result.first())
