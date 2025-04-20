@@ -17,6 +17,7 @@
 package com.harry.sanctum.core.sync
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
@@ -55,14 +56,17 @@ internal class WorkManagerSyncManager @Inject constructor(
             )
     }
 
-    private fun createSyncWorkRequest(): OneTimeWorkRequest =
-        OneTimeWorkRequestBuilder<SyncWorker>()
+    @VisibleForTesting
+    internal fun createSyncWorkRequest(): OneTimeWorkRequest =
+        OneTimeWorkRequestBuilder<DelegatingWorker>()
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
                     .build(),
-            ).build()
+            )
+            .setInputData(SyncWorker::class.delegatedData())
+            .build()
 
     companion object {
         const val SYNC_WORK_NAME = "sanctumSyncWork"

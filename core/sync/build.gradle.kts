@@ -40,6 +40,8 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.timber)
 
+    ksp(libs.hilt.ext.compiler)
+
     androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.runner)
