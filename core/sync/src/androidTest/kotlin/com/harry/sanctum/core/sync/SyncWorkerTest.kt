@@ -19,6 +19,7 @@ package com.harry.sanctum.core.sync
 import android.content.Context
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SdkSuppress
 import androidx.work.Configuration
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -60,6 +61,14 @@ internal class SyncWorkerTest {
         WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
+    /**
+     * WorkManager with constraints (e.g., NetworkType.CONNECTED) may fail on API 26 when using
+     * SynchronousExecutor during tests. This is a known issue due to the way constraints are
+     * simulated and WorkManager's internal threading on lower SDKs.
+     *
+     * https://issuetracker.google.com/issues/128554485
+     */
+    @SdkSuppress(minSdkVersion = 27)
     @Test
     fun doWork_shouldSucceedWhenEntriesExist() {
         val request = syncManager.createSyncWorkRequest()
