@@ -48,7 +48,7 @@ class EncryptedPrefsObserverTest {
     @Inject
     lateinit var prefs: SharedPreferences
 
-    private lateinit var observer: EncryptedPrefsObserverImpl
+    private lateinit var observer: EncryptedPrefsObserver
 
     @Before
     fun setup() {
@@ -62,7 +62,7 @@ class EncryptedPrefsObserverTest {
         val key = "testKey"
         val emissions = mutableListOf<String?>()
         val job = launch(TestDispatchersProvider.io) {
-            observer.observe<String?>(key).toList(emissions)
+            observer.observe<String>(key).toList(emissions)
         }
 
         prefs.edit(commit = true) { putString(key, "Test") }

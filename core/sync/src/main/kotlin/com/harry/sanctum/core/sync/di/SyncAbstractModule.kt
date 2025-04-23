@@ -22,6 +22,8 @@ import com.harry.sanctum.core.database.model.EntryEntity
 import com.harry.sanctum.core.sync.SyncManager
 import com.harry.sanctum.core.sync.WorkManagerSyncManager
 import com.harry.sanctum.core.sync.data.EntryPayload
+import com.harry.sanctum.core.sync.data.SyncObserver
+import com.harry.sanctum.core.sync.data.SyncObserverImpl
 import com.harry.sanctum.core.sync.data.factories.JournalEntriesBatchWriteRequestFactory
 import com.harry.sanctum.core.sync.data.factories.JournalEntriesStructuredQueryRequestFactory
 import dagger.Binds
@@ -45,4 +47,7 @@ internal interface SyncAbstractModule {
     fun bindJournalEntriesStructuredQueryRequestFactory(
         factory: JournalEntriesStructuredQueryRequestFactory,
     ): StructuredQueryRequestFactory
+
+    @Binds
+    fun bindSyncObserver(observe: SyncObserverImpl): SyncObserver
 }

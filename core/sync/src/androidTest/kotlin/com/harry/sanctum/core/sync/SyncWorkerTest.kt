@@ -39,7 +39,7 @@ import kotlin.test.assertEquals
 @RunWith(AndroidJUnit4::class)
 internal class SyncWorkerTest {
 
-    @get:Rule(order = 0)
+    @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @ApplicationContext
