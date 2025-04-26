@@ -30,6 +30,7 @@ androidxWork = "2.10.1"
 coil = "2.7.0"
 dependencyGuard = "0.5.0"
 gmsPlugin = "4.4.2"
+googleCryptoTink = "1.11.0"
 googleOss = "17.1.0"
 googleOssPlugin = "0.10.6"
 firebaseBom = "33.12.0"
@@ -108,6 +109,7 @@ coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+google-tink-android = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "googleCryptoTink" }
 google-oss-licenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "googleOss" }
 google-oss-licenses-plugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "googleOssPlugin" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
