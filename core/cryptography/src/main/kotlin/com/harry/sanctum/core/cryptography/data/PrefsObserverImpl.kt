@@ -18,7 +18,6 @@ package com.harry.sanctum.core.cryptography.data
 
 import android.content.SharedPreferences
 import com.harry.sanctum.core.common.coroutines.DispatchersProvider
-import com.harry.sanctum.core.cryptography.di.EncryptedPrefs
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -27,14 +26,11 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-internal class EncryptedPrefsObserverImpl @Inject constructor(
-    @EncryptedPrefs private val prefs: SharedPreferences,
+class PrefsObserverImpl(
+    private val prefs: SharedPreferences,
     private val dispatchersProvider: DispatchersProvider,
-) : EncryptedPrefsObserver {
+) : PrefsObserver {
 
     private val observer = callbackFlow<Pair<String, Any?>> {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->

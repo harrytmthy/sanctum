@@ -18,6 +18,6 @@ package com.harry.sanctum.core.cryptography.data
 
 import kotlinx.coroutines.flow.Flow
 
-interface EncryptedPrefsObserver {
+interface PrefsObserver {
     fun <T> observe(key: String): Flow<T?>
 }

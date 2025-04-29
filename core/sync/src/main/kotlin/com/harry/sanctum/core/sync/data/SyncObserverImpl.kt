@@ -17,7 +17,7 @@
 package com.harry.sanctum.core.sync.data
 
 import com.harry.sanctum.core.common.constants.SessionConstants.PREF_USER_ID
-import com.harry.sanctum.core.cryptography.data.EncryptedPrefsObserver
+import com.harry.sanctum.core.cryptography.data.PrefsObserver
 import com.harry.sanctum.core.database.dao.EntrySyncDao
 import com.harry.sanctum.core.sync.SyncManager
 import kotlinx.coroutines.flow.Flow
@@ -30,13 +30,13 @@ import javax.inject.Singleton
 
 @Singleton
 internal class SyncObserverImpl @Inject constructor(
-    private val encryptedPrefsObserver: EncryptedPrefsObserver,
+    private val prefsObserver: PrefsObserver,
     private val entrySyncDao: EntrySyncDao,
     private val syncManager: SyncManager,
 ) : SyncObserver {
 
     override fun observeSync(): Flow<Unit> =
-        encryptedPrefsObserver.observe<String>(PREF_USER_ID)
+        prefsObserver.observe<String>(PREF_USER_ID)
             .filterNot { it.isNullOrEmpty() }
             .flatMapLatest {
                 entrySyncDao.observePendingEntries()

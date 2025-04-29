@@ -22,9 +22,10 @@ import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionSche
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 import androidx.security.crypto.EncryptedSharedPreferences.create
 import androidx.security.crypto.MasterKey
+import com.harry.sanctum.core.common.coroutines.DispatchersProvider
 import com.harry.sanctum.core.cryptography.data.CryptographyRepositoryImpl
-import com.harry.sanctum.core.cryptography.data.EncryptedPrefsObserver
-import com.harry.sanctum.core.cryptography.data.EncryptedPrefsObserverImpl
+import com.harry.sanctum.core.cryptography.data.PrefsObserver
+import com.harry.sanctum.core.cryptography.data.PrefsObserverImpl
 import com.harry.sanctum.core.cryptography.domain.CryptographyRepository
 import dagger.Module
 import dagger.Provides
@@ -54,8 +55,11 @@ internal object CryptographyModule {
     fun provideRepository(repository: CryptographyRepositoryImpl): CryptographyRepository =
         repository
 
+    @EncryptedPrefs
     @Singleton
     @Provides
-    fun provideEncryptedPrefsObserver(impl: EncryptedPrefsObserverImpl): EncryptedPrefsObserver =
-        impl
+    fun provideEncryptedPrefsObserver(
+        @EncryptedPrefs prefs: SharedPreferences,
+        dispatchersProvider: DispatchersProvider,
+    ): PrefsObserver = PrefsObserverImpl(prefs, dispatchersProvider)
 }

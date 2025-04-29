@@ -36,7 +36,7 @@ import kotlin.test.assertEquals
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
-class EncryptedPrefsObserverTest {
+class PrefsObserverTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
@@ -48,12 +48,12 @@ class EncryptedPrefsObserverTest {
     @Inject
     lateinit var prefs: SharedPreferences
 
-    private lateinit var observer: EncryptedPrefsObserver
+    private lateinit var observer: PrefsObserver
 
     @Before
     fun setup() {
         hiltRule.inject()
-        observer = EncryptedPrefsObserverImpl(prefs, TestDispatchersProvider)
+        observer = PrefsObserverImpl(prefs, TestDispatchersProvider)
         prefs.edit(commit = true) { clear() }
     }
 
