@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.harry.sanctum.core.sync
+package com.harry.sanctum.core.common.sync
 
 import kotlinx.coroutines.flow.Flow
 

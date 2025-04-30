@@ -17,9 +17,9 @@
 package com.harry.sanctum.core.sync.data
 
 import com.harry.sanctum.core.common.constants.SessionConstants.PREF_USER_ID
+import com.harry.sanctum.core.common.sync.SyncManager
 import com.harry.sanctum.core.cryptography.data.PrefsObserver
 import com.harry.sanctum.core.database.dao.EntrySyncDao
-import com.harry.sanctum.core.sync.SyncManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.flatMapLatest

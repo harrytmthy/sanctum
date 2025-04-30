@@ -18,8 +18,8 @@ package com.harry.sanctum.core.sync.di
 
 import com.harry.sanctum.core.common.factories.BatchWriteRequestFactory
 import com.harry.sanctum.core.common.factories.StructuredQueryRequestFactory
+import com.harry.sanctum.core.common.sync.SyncManager
 import com.harry.sanctum.core.database.model.EntryEntity
-import com.harry.sanctum.core.sync.SyncManager
 import com.harry.sanctum.core.sync.WorkManagerSyncManager
 import com.harry.sanctum.core.sync.data.EntryPayload
 import com.harry.sanctum.core.sync.data.SyncObserver
