@@ -42,6 +42,11 @@ dependencies {
 
     ksp(libs.hilt.ext.compiler)
 
+    testImplementation(projects.core.cryptographyTest)
+    testImplementation(projects.core.databaseTest)
+    testImplementation(projects.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.runner)
