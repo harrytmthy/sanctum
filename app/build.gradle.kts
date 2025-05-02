@@ -29,10 +29,10 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum"
+    namespace = "com.harrytmthy.sanctum"
 
     defaultConfig {
-        applicationId = "com.harry.sanctum"
+        applicationId = "com.harrytmthy.sanctum"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         versionCode = 1
         versionName = "1.0.0"

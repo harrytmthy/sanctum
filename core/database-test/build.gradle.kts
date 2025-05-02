@@ -18,7 +18,7 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.database.test"
+    namespace = "com.harrytmthy.sanctum.core.database.test"
 }
 
 dependencies {

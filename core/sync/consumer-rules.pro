@@ -1,5 +1,5 @@
 # Hilt Worker requires class name to remain readable
--keepnames class com.harry.sanctum.** extends androidx.work.CoroutineWorker
+-keepnames class com.harrytmthy.sanctum.** extends androidx.work.CoroutineWorker
 
 # kotlinx.serialization (used in EntryPayload, Document, etc.)
 -if @kotlinx.serialization.Serializable class **

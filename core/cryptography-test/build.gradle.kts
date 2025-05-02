@@ -18,7 +18,7 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.cryptography.test"
+    namespace = "com.harrytmthy.sanctum.core.cryptography.test"
 }
 
 dependencies {

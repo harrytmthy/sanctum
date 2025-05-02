@@ -16,7 +16,7 @@
 
 import androidx.room.gradle.RoomExtension
 import com.google.devtools.ksp.gradle.KspExtension
-import com.harry.sanctum.libs
+import com.harrytmthy.sanctum.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply

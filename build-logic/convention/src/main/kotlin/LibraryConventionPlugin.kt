@@ -15,7 +15,7 @@
  */
 
 import com.android.build.gradle.LibraryExtension
-import com.harry.sanctum.libs
+import com.harrytmthy.sanctum.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply

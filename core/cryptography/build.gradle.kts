@@ -19,9 +19,9 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.cryptography"
+    namespace = "com.harrytmthy.sanctum.core.cryptography"
     defaultConfig {
-        testInstrumentationRunner = "com.harry.sanctum.core.testing.HiltTestRunner"
+        testInstrumentationRunner = "com.harrytmthy.sanctum.core.testing.HiltTestRunner"
     }
 }
 

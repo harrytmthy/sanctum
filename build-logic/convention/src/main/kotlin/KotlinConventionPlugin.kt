@@ -17,9 +17,9 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.LibraryExtension
-import com.harry.sanctum.isApplication
-import com.harry.sanctum.isLibrary
-import com.harry.sanctum.libs
+import com.harrytmthy.sanctum.isApplication
+import com.harrytmthy.sanctum.isLibrary
+import com.harrytmthy.sanctum.libs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project

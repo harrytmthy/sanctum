@@ -22,7 +22,7 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.network"
+    namespace = "com.harrytmthy.sanctum.core.network"
     defaultConfig {
         rootProject.file("secrets.properties")
             .reader()

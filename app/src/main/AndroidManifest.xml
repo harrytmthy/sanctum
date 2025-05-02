@@ -32,7 +32,7 @@
         tools:targetApi="33">
 
         <activity
-            android:name="com.harry.sanctum.ui.MainActivity"
+            android:name="com.harrytmthy.sanctum.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Sanctum">
             <intent-filter>
@@ -53,15 +53,15 @@
                 tools:node="remove" />
 
             <meta-data
-                android:name="com.harry.sanctum.initializers.StrictModeInitializer"
+                android:name="com.harrytmthy.sanctum.initializers.StrictModeInitializer"
                 android:value="androidx.startup" />
 
             <meta-data
-                android:name="com.harry.sanctum.initializers.TimberInitializer"
+                android:name="com.harrytmthy.sanctum.initializers.TimberInitializer"
                 android:value="androidx.startup" />
 
             <meta-data
-                android:name="com.harry.sanctum.initializers.WorkManagerInitializer"
+                android:name="com.harrytmthy.sanctum.initializers.WorkManagerInitializer"
                 android:value="androidx.startup" />
 
         </provider>

@@ -21,9 +21,9 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.sync"
+    namespace = "com.harrytmthy.sanctum.core.sync"
     defaultConfig {
-        testInstrumentationRunner = "com.harry.sanctum.core.testing.HiltTestRunner"
+        testInstrumentationRunner = "com.harrytmthy.sanctum.core.testing.HiltTestRunner"
     }
 }
 

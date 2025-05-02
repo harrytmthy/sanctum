@@ -20,7 +20,7 @@ plugins {
 }
 
 android {
-    namespace = "com.harry.sanctum.core.database"
+    namespace = "com.harrytmthy.sanctum.core.database"
 
 }
 
