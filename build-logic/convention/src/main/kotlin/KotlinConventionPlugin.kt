@@ -51,7 +51,7 @@ class KotlinConventionPlugin : Plugin<Project> {
 
     private inline fun <reified T : CommonExtension<*, *, *, *, *, *>> Project.configureAndroid() {
         extensions.configure<T> {
-            compileSdk = 35
+            compileSdk = 36
             defaultConfig.minSdk = 24
             when (this) {
                 is ApplicationExtension -> defaultConfig.targetSdk = 35
@@ -87,6 +87,7 @@ class KotlinConventionPlugin : Plugin<Project> {
             }.apply {
                 jvmTarget = JvmTarget.JVM_11
                 allWarningsAsErrors = warningsAsErrors.toBoolean()
+                freeCompilerArgs.add("-opt-in=kotlin.time.ExperimentalTime")
                 freeCompilerArgs.add("-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
                 freeCompilerArgs.add("-opt-in=kotlinx.coroutines.FlowPreview")
                 freeCompilerArgs.add("-Xconsistent-data-class-copy-visibility")
