@@ -32,7 +32,7 @@ class PrefsObserverImpl(
     private val dispatchersProvider: DispatchersProvider,
 ) : PrefsObserver {
 
-    private val observer = callbackFlow<Pair<String, Any?>> {
+    private val observer = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             key ?: return@OnSharedPreferenceChangeListener
             trySend(key to prefs.all[key])

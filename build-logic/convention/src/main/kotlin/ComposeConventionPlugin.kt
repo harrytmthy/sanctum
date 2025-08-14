@@ -42,7 +42,6 @@ class ComposeConventionPlugin : Plugin<Project> {
         }
     }
 
-    @Suppress("UnstableApiUsage")
     private inline fun <reified T : CommonExtension<*, *, *, *, *, *>> Project.configureCompose() {
         extensions.configure<T> {
             buildFeatures {
