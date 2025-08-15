@@ -20,20 +20,24 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefs
+import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefsModule
 import com.harrytmthy.sanctum.core.testing.coroutines.TestDispatchersProvider
+import com.harrytmthy.sanctum.core.testing.prefs.FakeSharedPreferences
 import com.harrytmthy.sanctum.core.testing.rules.MainDispatcherRule
+import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
-import javax.inject.Inject
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@UninstallModules(EncryptedPrefsModule::class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class PrefsObserverTest {
@@ -45,8 +49,8 @@ class PrefsObserverTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     @EncryptedPrefs
-    @Inject
-    lateinit var prefs: SharedPreferences
+    @BindValue
+    val prefs: SharedPreferences = FakeSharedPreferences()
 
     private lateinit var observer: PrefsObserver
 

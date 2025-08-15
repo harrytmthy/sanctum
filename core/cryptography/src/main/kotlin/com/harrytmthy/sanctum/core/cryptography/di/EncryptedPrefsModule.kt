@@ -16,32 +16,29 @@
 
 package com.harrytmthy.sanctum.core.cryptography.di
 
+import android.content.Context
 import android.content.SharedPreferences
+import com.harrytmthy.safebox.SafeBox
 import com.harrytmthy.sanctum.core.common.coroutines.DispatchersProvider
-import com.harrytmthy.sanctum.core.cryptography.data.CryptographyRepositoryImpl
-import com.harrytmthy.sanctum.core.cryptography.data.PrefsObserver
-import com.harrytmthy.sanctum.core.cryptography.data.PrefsObserverImpl
-import com.harrytmthy.sanctum.core.cryptography.domain.CryptographyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object CryptographyModule {
+object EncryptedPrefsModule {
 
-    @Singleton
-    @Provides
-    fun provideRepository(repository: CryptographyRepositoryImpl): CryptographyRepository =
-        repository
+    private const val PREF_FILE_NAME = "SDE7Bx0C"
 
     @EncryptedPrefs
     @Singleton
     @Provides
-    fun provideEncryptedPrefsObserver(
-        @EncryptedPrefs prefs: SharedPreferences,
+    fun provideEncryptedPreferences(
+        @ApplicationContext context: Context,
         dispatchersProvider: DispatchersProvider,
-    ): PrefsObserver = PrefsObserverImpl(prefs, dispatchersProvider)
+    ): SharedPreferences =
+        SafeBox.create(context, fileName = PREF_FILE_NAME, ioDispatcher = dispatchersProvider.io)
 }

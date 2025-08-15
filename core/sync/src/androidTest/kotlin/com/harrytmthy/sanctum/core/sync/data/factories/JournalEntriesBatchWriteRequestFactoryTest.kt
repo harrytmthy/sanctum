@@ -22,10 +22,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.harrytmthy.sanctum.core.common.constants.SessionConstants.PREF_USER_ID
 import com.harrytmthy.sanctum.core.common.factories.BatchWriteRequestFactory
 import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefs
+import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefsModule
 import com.harrytmthy.sanctum.core.database.model.EntryEntity
 import com.harrytmthy.sanctum.core.sync.data.EntryPayload
+import com.harrytmthy.sanctum.core.testing.prefs.FakeSharedPreferences
+import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import kotlinx.datetime.Instant
 import org.junit.Before
 import org.junit.Rule
@@ -35,6 +39,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+@UninstallModules(EncryptedPrefsModule::class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class JournalEntriesBatchWriteRequestFactoryTest {
@@ -43,8 +48,8 @@ class JournalEntriesBatchWriteRequestFactoryTest {
     val hiltRule = HiltAndroidRule(this)
 
     @EncryptedPrefs
-    @Inject
-    lateinit var prefs: SharedPreferences
+    @BindValue
+    val prefs: SharedPreferences = FakeSharedPreferences()
 
     @Inject
     lateinit var batchWriteRequestFactory: BatchWriteRequestFactory<EntryEntity, EntryPayload>

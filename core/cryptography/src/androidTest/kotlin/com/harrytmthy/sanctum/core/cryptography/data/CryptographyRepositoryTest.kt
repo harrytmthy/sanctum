@@ -16,12 +16,18 @@
 
 package com.harrytmthy.sanctum.core.cryptography.data
 
+import android.content.SharedPreferences
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.harrytmthy.sanctum.core.cryptography.Cryptography
+import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefs
+import com.harrytmthy.sanctum.core.cryptography.di.EncryptedPrefsModule
 import com.harrytmthy.sanctum.core.cryptography.domain.CryptographyRepository
 import com.harrytmthy.sanctum.core.cryptography.model.CryptographyMetadata
+import com.harrytmthy.sanctum.core.testing.prefs.FakeSharedPreferences
+import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -32,12 +38,17 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+@UninstallModules(EncryptedPrefsModule::class)
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class CryptographyRepositoryTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
+
+    @EncryptedPrefs
+    @BindValue
+    val prefs: SharedPreferences = FakeSharedPreferences()
 
     @Inject
     lateinit var repository: CryptographyRepository
