@@ -32,8 +32,8 @@ import javax.inject.Singleton
 
 @Singleton
 internal class JournalEntriesBatchWriteRequestFactory @Inject constructor(
-    @BaseUrl private val baseUrl: String,
-    @EncryptedPrefs private val prefs: SharedPreferences,
+    @param:BaseUrl private val baseUrl: String,
+    @param:EncryptedPrefs private val prefs: SharedPreferences,
 ) : BatchWriteRequestFactory<EntryEntity, EntryPayload> {
 
     override fun create(entities: List<EntryEntity>): BatchWriteRequest<EntryPayload> {

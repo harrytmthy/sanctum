@@ -32,7 +32,7 @@ import javax.inject.Singleton
 
 @Singleton
 internal class JournalEntriesStructuredQueryRequestFactory @Inject constructor(
-    @EncryptedPrefs private val prefs: SharedPreferences,
+    @param:EncryptedPrefs private val prefs: SharedPreferences,
 ) : StructuredQueryRequestFactory {
 
     override fun create(page: Int): StructuredQueryRequest {

@@ -26,7 +26,7 @@ import com.harrytmthy.sanctum.core.cryptography.model.CryptographyMetadata
 import javax.inject.Inject
 
 internal class CryptographyRepositoryImpl @Inject constructor(
-    @EncryptedPrefs private val prefs: SharedPreferences,
+    @param:EncryptedPrefs private val prefs: SharedPreferences,
 ) : CryptographyRepository {
 
     private var sessionKey: String? = null

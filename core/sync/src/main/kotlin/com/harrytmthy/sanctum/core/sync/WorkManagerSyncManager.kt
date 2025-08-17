@@ -36,7 +36,7 @@ import javax.inject.Singleton
 
 @Singleton
 internal class WorkManagerSyncManager @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ) : SyncManager {
 
     override val isSyncing: Flow<Boolean> =

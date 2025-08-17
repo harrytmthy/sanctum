@@ -47,8 +47,8 @@ import javax.inject.Singleton
 
 @Singleton
 internal class ConnectivityManagerNetworkMonitor @Inject constructor(
-    @ApplicationContext private val context: Context,
-    @ApplicationScope private val applicationScope: CoroutineScope,
+    @param:ApplicationContext private val context: Context,
+    @param:ApplicationScope private val applicationScope: CoroutineScope,
     private val dispatchersProvider: DispatchersProvider,
 ) : NetworkMonitor {
 
